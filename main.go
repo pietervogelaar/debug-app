@@ -9,6 +9,13 @@ import (
 )
 
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "[Client]\n")
+	fmt.Fprintf(w, "X-Real-Ip: \"%s\"\n", r.Header.Get("X-Real-Ip"))
+	fmt.Fprintf(w, "X-Forwarded-For: \"%s\"\n", r.Header.Get("X-Forwarded-For"))
+	fmt.Fprintf(w, "IP: \"%s\"\n", r.RemoteAddr)
+
+	fmt.Fprintf(w, "\n")
+
 	fmt.Fprintf(w, "[Request]\n")
 	fmt.Fprintf(w, "Host: \"%s\"\n", r.Host)
 	fmt.Fprintf(w, "Headers: \"%+v\"\n", r.Header)
