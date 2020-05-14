@@ -41,3 +41,16 @@ Debug app to run as pods in Kubernetes.
             image: pietervogelaar/debug-app:latest
             ports:
             - containerPort: 8080
+          affinity:
+            podAntiAffinity:
+              # Preferably do not run more than one pod on the same node
+              preferredDuringSchedulingIgnoredDuringExecution:
+              - podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - debug-app
+                  topologyKey: kubernetes.io/hostname
+                weight: 100
