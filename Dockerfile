@@ -17,7 +17,7 @@ RUN CGO_ENABLED=0 GOOS=linux \
 
 ############################
 
-FROM alpine:3.11
+FROM alpine:3.12.0
 
 WORKDIR /usr/local/bin
 
@@ -26,6 +26,7 @@ RUN apk update && \
         bash \
         curl \
         busybox-extras \
+        bind-tools \
         jq \
         openssl
 
