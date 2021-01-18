@@ -23,20 +23,26 @@ WORKDIR /usr/local/bin
 
 RUN apk update && \
     apk add --no-cache \
-        bash \
-        curl \
-        busybox-extras \
-        bind-tools \
-        jq \
-        openssl
+      bash \
+      curl \
+      busybox-extras \
+      bind-tools \
+      jq \
+      openssl \
+      shadow && \
+    sed -i -e 's/CREATE_MAIL_SPOOL=yes/CREATE_MAIL_SPOOL=no/g' /etc/default/useradd && \
+    useradd -u 5000 debug-app
 
 # Import from builder
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /go/bin/debug-app /debug-app
 
-RUN chmod 750 /debug-app
+RUN chown debug-app:debug-app /debug-app && \
+    chmod 750 /debug-app
 
 ENTRYPOINT ["/debug-app"]
+
+USER debug-app
 
 EXPOSE 8080
