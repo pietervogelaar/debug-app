@@ -17,7 +17,7 @@ RUN CGO_ENABLED=0 GOOS=linux \
 
 ############################
 
-FROM alpine:3.12.0
+FROM alpine:3.12.3
 
 WORKDIR /usr/local/bin
 
