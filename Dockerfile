@@ -17,7 +17,7 @@ RUN CGO_ENABLED=0 GOOS=linux \
 
 ############################
 
-FROM alpine:3.12.3
+FROM alpine:3.21.3
 
 WORKDIR /usr/local/bin
 
@@ -29,6 +29,7 @@ RUN apk update && \
       bind-tools \
       jq \
       openssl \
+      openldap-clients \
       shadow && \
     sed -i -e 's/CREATE_MAIL_SPOOL=yes/CREATE_MAIL_SPOOL=no/g' /etc/default/useradd && \
     useradd -u 5000 debug-app
