@@ -1,4 +1,4 @@
-FROM golang:1.13.9-alpine as builder
+FROM golang:1.13.9-alpine AS builder
 
 ENV GO111MODULE=on
 
@@ -31,7 +31,6 @@ RUN apk update && \
       openssl \
       openldap-clients \
       shadow && \
-    sed -i -e 's/CREATE_MAIL_SPOOL=yes/CREATE_MAIL_SPOOL=no/g' /etc/default/useradd && \
     useradd -u 5000 debug-app
 
 # Import from builder
