@@ -28,6 +28,7 @@ RUN apk update && \
       busybox-extras \
       bind-tools \
       jq \
+      ruby \
       openssl \
       openldap-clients \
       shadow && \
