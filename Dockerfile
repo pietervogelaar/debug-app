@@ -17,7 +17,7 @@ RUN CGO_ENABLED=0 GOOS=linux \
 
 ############################
 
-FROM alpine:3.21.3
+FROM alpine:3.23.3
 
 WORKDIR /usr/local/bin
 
@@ -31,6 +31,7 @@ RUN apk update && \
       ruby \
       openssl \
       openldap-clients \
+      nfs-utils \
       shadow && \
     useradd -u 5000 debug-app
 
